@@ -7,25 +7,24 @@ const courses = [
     level: "Essential",
     tag: "A1 - A2",
     title: "The Groundwork",
-    description: "Para quem está começando do zero. Foco em situações cotidianas, pronúncia britânica básica e confiança para as primeiras conversas."
+    description: "Para quem está começando do zero. Foco em comunicação básica e confiança para as primeiras conversas."
   },
   {
     level: "Intermediate",
     tag: "B1 - B2",
     title: "Cultural Bridge",
-    description: "Onde a fluência ganha forma. Explore nuances do idioma, gírias locais e domine reuniões internacionais com naturalidade."
+    description: "Explore nuances do idioma e tenha mais confiança em conversas que exijam um vocabulário mais amplo."
   },
   {
     level: "Advanced",
     tag: "C1 - C2",
     title: "British Mastery",
-    description: "Refinamento máximo. Discussões complexas, negócios e o domínio do sotaque para quem busca a excelência de um nativo."
+    description: "Refinamento máximo do idioma. Discussões complexas e a possibilidade de se comunicar com o mundo."
   }
 ];
 
 export default function CourseLevels() {
   return (
-    // Mudamos de bg-[#0a0a0a] para um off-white elegante
     <section id="courses" className="bg-[#f8f8f8] py-24 px-6 text-[#1a1a1a]">
       <div className="container mx-auto max-w-6xl">
         
@@ -33,8 +32,7 @@ export default function CourseLevels() {
           <span className="text-red-600 font-bold tracking-[0.3em] text-xs uppercase block mb-4">
             Nossa Jornada
           </span>
-          {/* Título agora em preto com cinza suave */}
-          <h2 className="text-5xl md:text-7xl font-black text-[#1a1a1a] uppercase tracking-tighter leading-none">
+          <h2 className="text-5xl md:text-6xl font-black text-[#1a1a1a] uppercase tracking-tighter leading-none">
             Níveis de <br /> <span className="text-black/20 italic">Excelência</span>
           </h2>
         </div>
@@ -43,7 +41,6 @@ export default function CourseLevels() {
           {courses.map((course, index) => (
             <div 
               key={index} 
-              // Card agora é branco puro com uma sombra bem leve
               className="group relative bg-white border border-black/5 p-10 hover:shadow-2xl hover:shadow-red-600/10 transition-all duration-500 flex flex-col justify-between"
             >
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">
@@ -69,12 +66,7 @@ export default function CourseLevels() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-black/5 group-hover:border-red-600/30 transition-colors">
-                <button className="text-black text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:text-red-600 transition-colors">
-                  Saiba mais 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </button>
-              </div>
+              <div className="pt-4 border-t border-black/5 group-hover:border-red-600/30 transition-colors" />
             </div>
           ))}
         </div>

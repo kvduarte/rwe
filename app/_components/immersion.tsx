@@ -6,12 +6,12 @@ const immersionSteps = [
   {
     id: "01",
     title: "Real-Life Scenarios",
-    desc: "Simulações de situações reais: desde pedir um café no Borough Market até uma entrevista de emprego na City of London."
+    desc: "Inglês real do dia a dia, desde cumprimentar alguém até situações que envolvam o uso do inglês em contextos específicos."
   },
   {
     id: "02",
     title: "Cultural Deep Dive",
-    desc: "Exploramos gírias, etiqueta social e o humor britânico. Você aprende a se comportar como um local, não como um turista."
+    desc: "Inglês não é só a fala mas também particularidades do idioma em diferentes contextos e culturas."
   },
   {
     id: "03",
@@ -22,21 +22,18 @@ const immersionSteps = [
 
 export default function Immersion() {
   return (
-    // Alterado para um Cinza Antracite Premium (#121212)
-    <section id="immersion" className="bg-[#121212] py-24 px-6 overflow-hidden">
+    <section id="immersion" className="bg-black py-24 px-6 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         
         <div className="flex flex-col md:flex-row gap-16 items-center">
           
-          {/* Lado Esquerdo: Visual Impactante */}
           <div className="w-full md:w-1/2 relative">
-            <div className="relative h-[600px] w-full bg-[#1a1a1a] overflow-hidden group">
+            <div className="relative h-150 w-full overflow-hidden group">
               <img 
                 src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=2070" 
                 alt="London Atmosphere" 
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
+                className="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
               />
-              {/* Badge de Localização flutuante */}
               <div className="absolute bottom-8 left-8 bg-black text-white p-6 backdrop-blur-sm bg-opacity-90">
                 <p className="text-[10px] tracking-[0.3em] uppercase font-bold text-red-600 mb-1">Location</p>
                 <p className="text-sm font-serif italic">Piccadilly Circus, W1</p>
@@ -44,13 +41,12 @@ export default function Immersion() {
             </div>
           </div>
 
-          {/* Lado Direito: Conteúdo */}
           <div className="w-full md:w-1/2 space-y-12">
             <div className="space-y-4">
               <span className="text-red-600 font-bold tracking-[0.4em] text-[10px] uppercase">
                 Methodology
               </span>
-              <h2 className="text-5xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter">
+              <h2 className="text-5xl md:text-6xl font-black text-white leading-none uppercase tracking-tighter">
                 A Imersão <br /> 
                 <span className="text-red-600 italic">Definitiva</span>
               </h2>
@@ -59,7 +55,6 @@ export default function Immersion() {
               </p>
             </div>
 
-            {/* Lista de Passos da Imersão */}
             <div className="space-y-10">
               {immersionSteps.map((step) => (
                 <div key={step.id} className="group flex gap-6 border-b border-white/5 pb-8">
@@ -77,10 +72,6 @@ export default function Immersion() {
                 </div>
               ))}
             </div>
-
-            <button className="bg-white text-black px-12 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-red-600 hover:text-white transition-all duration-500">
-              Agendar Aula Experimental
-            </button>
           </div>
 
         </div>
