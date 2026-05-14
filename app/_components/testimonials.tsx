@@ -33,6 +33,7 @@ const testimonials = [
     image: "/aluna 4.jpeg" 
   }
 ];
+////
 
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
@@ -51,7 +52,6 @@ export default function Testimonials() {
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => observer.disconnect();
   }, []);
 
@@ -65,11 +65,9 @@ export default function Testimonials() {
 
   useEffect(() => {
     if (!isVisible) return;
-
     const timer = setInterval(() => {
       nextTestimonial();
     }, 20000); 
-
     return () => clearInterval(timer);
   }, [nextTestimonial, index, isVisible]);
 
@@ -83,8 +81,7 @@ export default function Testimonials() {
     <section 
       ref={sectionRef} 
       id="testimonials" 
-      className="bg-[#f8f8f8] py-24 px-6 overflow-hidden"
-    >
+      className="bg-[#f8f8f8] py-24 px-6 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         
         <div className="mb-16 flex justify-between items-end">
