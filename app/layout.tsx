@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import Script from "next/script";
 
+import "./globals.css";
 import SmoothScroll from "./_components/smoothScroll";
 
 const geistSans = Geist({
@@ -19,8 +20,8 @@ export const metadata: Metadata = {
   description: "English for real communication",
 
   icons: {
-  icon: "/logo.png",
-},
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -37,6 +38,11 @@ export default function RootLayout({
         <SmoothScroll>
           {children}
         </SmoothScroll>
+
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
