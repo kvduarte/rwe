@@ -44,11 +44,11 @@ export default function AboutUs() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4">
               <div className="border-l-2 border-red-600 pl-4">
                 <h4 className="font-bold uppercase text-sm tracking-widest mb-1">Imersão Total</h4>
-                <p className="text-gray-500 text-sm">Foco 100% na comunicação, sotaque e cotidiano britânico real.</p>
+                <p className="text-gray-500 text-sm">Foco 100% na comunicação.</p>
               </div>
               <div className="border-l-2 border-white/20 pl-4">
                 <h4 className="font-bold uppercase text-sm tracking-widest mb-1">Professor</h4>
-                <p className="text-gray-500 text-sm">Aprenda com quem atua há mais de 15 anos, possui certificações internacionais e mais de 8 mil horas de estudo do idioma.</p>
+                <p className="text-gray-500 text-sm">Aprenda com quem atua há mais de 15 anos no mercado, possui certificações internacionais e mais de 8 mil horas de estudo do idioma.</p>
               </div>
             </div>
 

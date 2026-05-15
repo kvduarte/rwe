@@ -51,7 +51,7 @@ export default function Immersion() {
                 <span className="text-red-600 italic">Definitiva</span>
               </h2>
               <p className="text-gray-400 text-lg max-w-md font-light">
-                Esqueça os livros didáticos genéricos. Nossa metodologia é baseada na vivência real do Reino Unido.
+                Esqueça os livros didáticos genéricos. Nossa metodologia é baseada na vivência do mundo real.
               </p>
             </div>
 

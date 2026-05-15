@@ -20,17 +20,17 @@ const touristSpots = [
   },
   {
     url: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?q=80&w=2070",
-    location: "London Eye",
+    location: "Tower Bridge",
     position: "object-right",
   },
   {
     url: "https://images.unsplash.com/photo-1503917988258-f87a78e3c995?q=80&w=2070",
-    location: "Stonehenge",
+    location: "London Bridge",
     position: "object-center",
   },
   {
     url: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2070",
-    location: "Tower Bridge",
+    location: "River Thames",
     position: "object-right",
   },
 ];
@@ -131,7 +131,7 @@ export default function Showcase() {
             <span className="text-white font-black underline decoration-red-600 underline-offset-4">
               RWE
             </span>{" "}
-            conecta você diretamente com o cotidiano da Inglaterra.
+            conecta você diretamente com o mundo.
           </p>
 
           <div className="flex flex-wrap gap-5 pt-4">

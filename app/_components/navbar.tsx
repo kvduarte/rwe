@@ -83,18 +83,14 @@ export default function Navbar() {
       navbarOffset;
 
     const startPosition = window.scrollY;
-
     const distance = targetPosition - startPosition;
-
     const duration = 1200;
 
     let startTime: number | null = null;
 
     function animation(currentTime: number) {
       if (!startTime) startTime = currentTime;
-
       const timeElapsed = currentTime - startTime;
-
       const progress = Math.min(timeElapsed / duration, 1);
 
       const easeInOutCubic =
@@ -102,10 +98,7 @@ export default function Navbar() {
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
-      window.scrollTo(
-        0,
-        startPosition + distance * easeInOutCubic
-      );
+      window.scrollTo(0, startPosition + distance * easeInOutCubic);
 
       if (timeElapsed < duration) {
         requestAnimationFrame(animation);
@@ -131,23 +124,30 @@ export default function Navbar() {
               : "bg-transparent"
           }`}
         >
+          {/* LOGO COM BANDEIRA DO REINO UNIDO */}
           <button
             onClick={() => slowScrollTo("showcase")}
-            className="flex items-center gap-4 group cursor-pointer"
+            className="flex items-center gap-4 group cursor-pointer outline-none"
           >
-            <div className="relative w-12 h-10 border border-white/10 overflow-hidden shadow-lg transform group-hover:scale-105 transition-transform shrink-0">
-              <div className="absolute inset-0 bg-[#00247D]" />
-              <div className="absolute top-1/2 left-0 w-full h-3 bg-white -translate-y-1/2" />
-              <div className="absolute left-1/2 top-0 w-3 h-full bg-white -translate-x-1/2" />
-              <div className="absolute top-1/2 left-0 w-full h-1.5 bg-[#CF142B] -translate-y-1/2" />
-              <div className="absolute left-1/2 top-0 w-1.5 h-full bg-[#CF142B] -translate-x-1/2" />
+            <div className="relative w-12 h-8 border border-white/10 overflow-hidden shadow-2xl transform group-hover:scale-110 transition-transform duration-500 shrink-0 rounded-sm">
+              <svg 
+                viewBox="0 0 60 30" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-full object-cover"
+              >
+                <rect width="60" height="30" fill="#012169"/>
+                <path d="M0 0L60 30M60 0L0 30" stroke="#FFF" strokeWidth="6"/>
+                <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" strokeWidth="4"/>
+                <path d="M30 0V30M0 15H60" stroke="#FFF" strokeWidth="10"/>
+                <path d="M30 0V30M0 15H60" stroke="#C8102E" strokeWidth="6"/>
+              </svg>
             </div>
 
             <div className="flex flex-col text-left">
               <span className="text-white text-xl font-serif font-bold tracking-tight leading-none">
                 Real World
               </span>
-
               <span className="text-red-600 text-[11px] font-black uppercase tracking-[0.6em] leading-none mt-1 pl-1">
                 English
               </span>
@@ -169,7 +169,6 @@ export default function Navbar() {
                   }`}
                 >
                   {link.name}
-
                   <span
                     className={`absolute -bottom-1 left-0 h-0.5 bg-red-600 transition-all duration-300 ${
                       isActive
@@ -202,6 +201,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Menu Mobile */}
       <div
         className={`fixed inset-0 bg-black/95 backdrop-blur-2xl transition-all duration-500 lg:hidden flex flex-col items-center justify-center gap-8 ${
           isOpen
