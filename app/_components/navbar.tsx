@@ -7,66 +7,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("showcase");
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const whatsappUrl =
     "https://wa.me/5519991518640?text=Olá! Gostaria de saber mais sobre os cursos de inglês.";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-
-      const sections = ["showcase", "rwe", "courses", "immersion", "testimonials", "contact"];
-      const scrollPosition = window.scrollY + 120;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (!element) continue;
-
-        const offsetTop = element.offsetTop;
-        const offsetHeight = element.offsetHeight;
-
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          setActiveSection(section);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  function slowScrollTo(id: string) {
-    setIsOpen(false);
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    const offset = 80;
-    const bodyRect = document.body.getBoundingClientRect().top;
-    const elementRect = element.getBoundingClientRect().top;
-    const elementPosition = elementRect - bodyRect;
-    const offsetPosition = elementPosition - offset;
-
-    const startPosition = window.pageYOffset;
-    const distance = offsetPosition - startPosition;
-    const duration = 1200;
-    let start: number | null = null;
-
-    function step(timestamp: number) {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      const ease = (t: number) => (--t) * t * t + 1;
-
-      window.scrollTo(
-        0,
-        startPosition + distance * ease(Math.min(progress / duration, 1))
-      );
-
-      if (progress < duration) window.requestAnimationFrame(step);
-    }
-    window.requestAnimationFrame(step);
-  }
 
   const navLinks = [
     { name: "Sobre nós", id: "rwe" },
@@ -75,6 +19,103 @@ export default function Navbar() {
     { name: "Experiências", id: "testimonials" },
     { name: "Contato", id: "contact" },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isScrolling) return;
+
+      setScrolled(window.scrollY > 50);
+
+      const sections = [
+        "showcase",
+        "rwe",
+        "courses",
+        "immersion",
+        "testimonials",
+        "contact",
+      ];
+
+      const scrollPosition = window.scrollY + 140;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+
+        if (!element) continue;
+
+        const offsetTop = element.offsetTop;
+        const offsetHeight = element.offsetHeight;
+
+        if (
+          scrollPosition >= offsetTop &&
+          scrollPosition < offsetTop + offsetHeight
+        ) {
+          setActiveSection(section);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isScrolling]);
+
+  function slowScrollTo(id: string) {
+    setIsOpen(false);
+
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    setIsScrolling(true);
+
+    const navbarOffset = 80;
+
+    const targetPosition =
+      element.getBoundingClientRect().top +
+      window.scrollY -
+      navbarOffset;
+
+    const startPosition = window.scrollY;
+
+    const distance = targetPosition - startPosition;
+
+    const duration = 1200;
+
+    let startTime: number | null = null;
+
+    function animation(currentTime: number) {
+      if (!startTime) startTime = currentTime;
+
+      const timeElapsed = currentTime - startTime;
+
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      const easeInOutCubic =
+        progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+      window.scrollTo(
+        0,
+        startPosition + distance * easeInOutCubic
+      );
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      } else {
+        setIsScrolling(false);
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
 
   return (
     <nav
@@ -116,18 +157,24 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
+
               return (
                 <button
                   key={link.name}
                   onClick={() => slowScrollTo(link.id)}
                   className={`relative text-[12px] font-bold uppercase tracking-[0.15em] transition-colors group ${
-                    isActive ? "text-white" : "text-white/80 hover:text-white"
+                    isActive
+                      ? "text-white"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.name}
+
                   <span
                     className={`absolute -bottom-1 left-0 h-0.5 bg-red-600 transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                      isActive
+                        ? "w-full"
+                        : "w-0 group-hover:w-full"
                     }`}
                   />
                 </button>
@@ -157,7 +204,9 @@ export default function Navbar() {
 
       <div
         className={`fixed inset-0 bg-black/95 backdrop-blur-2xl transition-all duration-500 lg:hidden flex flex-col items-center justify-center gap-8 ${
-          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          isOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible"
         }`}
       >
         <button
@@ -169,12 +218,15 @@ export default function Navbar() {
 
         {navLinks.map((link) => {
           const isActive = activeSection === link.id;
+
           return (
             <button
               key={link.name}
               onClick={() => slowScrollTo(link.id)}
               className={`text-3xl font-black uppercase tracking-tight transition-colors ${
-                isActive ? "text-red-600" : "text-white hover:text-red-600"
+                isActive
+                  ? "text-red-600"
+                  : "text-white hover:text-red-600"
               }`}
             >
               {link.name}

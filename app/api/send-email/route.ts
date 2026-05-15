@@ -16,14 +16,9 @@ const rateLimiterEmail = new RateLimiterMemory({
   duration: 60 * 60 * 24,
 });
 
-const rateLimiterTelefone = new RateLimiterMemory({
-  points: 2,
-  duration: 60 * 60 * 24,
-});
-
 function corsHeaders() {
   return {
-    "Access-Control-Allow-Origin": process.env.CORS_ORIGIN || "http://realworldenglish.com.br/",
+    "Access-Control-Allow-Origin": process.env.CORS_ORIGIN || "https://www.realworldenglish.com.br",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
@@ -44,7 +39,7 @@ export async function POST(req: Request) {
       await rateLimiterIP.consume(ip);
     } catch {
       return NextResponse.json(
-        { success: false, error: "🚫 Muitas mensagens deste IP." },
+        { success: false, error: "🚫 Muitas mensagens enviadas. Tente novamente mais tarde." },
         { status: 429, headers: corsHeaders() }
       );
     }
@@ -60,7 +55,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { nome, email, telefone, assunto, mensagem, recaptchaToken } = parsed.data;
+    const { nome, email, mensagem, recaptchaToken } = parsed.data;
 
     const recaptchaRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
       method: "POST",
@@ -69,7 +64,8 @@ export async function POST(req: Request) {
     });
 
     const recaptchaData = await recaptchaRes.json();
-    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+
+    if (!recaptchaData.success) {
       return NextResponse.json(
         { success: false, error: "Falha na verificação de segurança." },
         { status: 400, headers: corsHeaders() }
@@ -78,174 +74,79 @@ export async function POST(req: Request) {
 
     const nomeSafe = sanitizeHtml(nome);
     const emailSafe = sanitizeHtml(email);
-    const telefoneSafe = sanitizeHtml(telefone || "");
-    const assuntoSafe = sanitizeHtml(assunto || "Nova mensagem do site");
     const mensagemSafe = sanitizeHtml(mensagem);
-    const telApenasNumeros = telefoneSafe.replace(/\D/g, "");
-
-    if (telApenasNumeros.length < 10 || telApenasNumeros.length > 11) {
-      return NextResponse.json(
-        { success: false, error: "Telefone inválido." },
-        { status: 400, headers: corsHeaders() }
-      );
-    }
 
     try {
       await rateLimiterEmail.consume(emailSafe.toLowerCase());
-      await rateLimiterTelefone.consume(telApenasNumeros);
     } catch {
       return NextResponse.json(
-        { success: false, error: "⚠️ Limite de envios atingido hoje." },
+        { success: false, error: "⚠️ Limite de envios atingido para este e-mail." },
         { status: 429, headers: corsHeaders() }
       );
     }
 
-    const whatsappLink = `https://wa.me/55${telApenasNumeros}`;
-
     const result = await resend.emails.send({
-      from: "KDuarte <onboarding@resend.dev>",
+      from: "Real World English <contato@realworldenglish.com.br>",
       to: process.env.EMAIL_TO!,
-      replyTo: emailSafe,
-      subject: ` NOVO CONTATO | ${nomeSafe.toUpperCase()}`,
+      subject: `🇬🇧 NOVO CONTATO: ${nomeSafe.toUpperCase()}`,
       html: `
         <!DOCTYPE html>
-        <html lang="pt-BR">
+        <html>
           <head>
-            <meta charset="UTF-8">
             <style>
-              body {
-                margin: 0; padding: 0;
-                background-color: #000000;
-                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                color: #ffffff;
-              }
-              .wrapper {
-                background: radial-gradient(circle at 100% 100%, #4a0404 0%, #1a0202 50%, #000000 100%);
-                padding: 40px 20px;
-              }
-              .container {
-                max-width: 600px;
-                margin: 0 auto;
-                background-color: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(212, 175, 55, 0.1);
-                border-radius: 24px;
-                overflow: hidden;
-              }
-              .header {
-                padding: 50px 40px 20px 40px;
-              }
-              .tag {
-                color: #D4AF37;
-                text-transform: uppercase;
-                font-size: 10px;
-                font-weight: bold;
-                letter-spacing: 5px;
-                margin-bottom: 15px;
-                display: block;
-              }
-              .title {
-                font-size: 36px;
-                font-weight: 900;
-                text-transform: uppercase;
-                letter-spacing: -1px;
-                line-height: 1;
-                margin: 0;
-              }
-              .serif {
-                font-family: 'Georgia', serif;
-                font-style: italic;
-                font-weight: 300;
-                color: #D4AF37;
-                text-transform: capitalize;
-              }
-              .content {
-                padding: 40px;
-              }
-              .field {
-                margin-bottom: 30px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                padding-bottom: 10px;
-              }
-              .label {
-                font-size: 9px;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                color: rgba(212, 175, 55, 0.8);
-                font-weight: bold;
-                margin-bottom: 8px;
-              }
-              .value {
-                font-size: 16px;
-                color: #ffffff;
-              }
-              .message-box {
-                background-color: rgba(255, 255, 255, 0.02);
-                padding: 25px;
-                border-radius: 12px;
-                border-left: 2px solid #D4AF37;
-                font-style: italic;
-                color: #e0e0e0;
-                line-height: 1.8;
-                margin-top: 10px;
-              }
-              .footer {
-                padding: 30px;
-                text-align: center;
-                background-color: rgba(0, 0, 0, 0.2);
-                border-top: 1px solid rgba(212, 175, 55, 0.05);
-              }
-              .btn {
-                display: inline-block;
-                background-color: #D4AF37;
-                color: #000000 !important;
-                padding: 18px 35px;
-                border-radius: 8px;
-                text-decoration: none;
-                font-weight: 900;
-                font-size: 11px;
-                letter-spacing: 3px;
-                text-transform: uppercase;
-                margin-top: 10px;
-              }
+              .body-wrap { background-color: #f0f4f8; padding: 40px 0; }
+              .container { font-family: 'Arial Black', sans-serif; max-width: 600px; margin: 0 auto; border-radius: 4px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #cc0000; }
+              .header { background-color: #002147; padding: 30px; text-align: center; }
+              .logo { color: #ffffff; font-size: 24px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
+              .logo-red { color: #cc0000; }
+              .content { padding: 40px 30px; background-color: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; }
+              .badge { display: inline-block; padding: 4px 12px; background-color: #e6f0ff; color: #002147; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; border: 1px solid #002147; }
+              .title { font-size: 22px; font-weight: 800; color: #002147; margin-bottom: 30px; line-height: 1.2; }
+              .info-block { margin-bottom: 25px; border-bottom: 1px solid #edf2f7; padding-bottom: 15px; }
+              .label { font-size: 11px; font-weight: bold; color: #cc0000; text-transform: uppercase; margin-bottom: 5px; }
+              .value { font-size: 16px; color: #1a202c; font-weight: 500; }
+              .message-box { background-color: #f9fafb; padding: 20px; border-radius: 4px; border: 1px dashed #cbd5e0; color: #4a5568; line-height: 1.6; margin-top: 10px; }
+              .btn-wrap { text-align: center; margin-top: 35px; }
+              .btn { background-color: #cc0000; color: #ffffff !important; padding: 15px 35px; text-decoration: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; display: inline-block; }
+              .footer { background-color: #002147; padding: 20px; text-align: center; font-size: 11px; color: #cbd5e0; }
             </style>
           </head>
           <body>
-            <div class="wrapper">
+            <div class="body-wrap">
               <div class="container">
                 <div class="header">
-                  <span class="tag">New Message</span>
-                  <h1 class="title">Fale <span class="serif">Comigo.</span></h1>
+                  <h1 class="logo">REAL WORLD <span class="logo-red">ENGLISH</span></h1>
                 </div>
                 
                 <div class="content">
-                  <div class="field">
+                  <div class="badge">Novo Lead</div>
+                  <h2 class="title">Você recebeu uma nova mensagem pelo site!</h2>
+                  
+                  <div class="info-block">
                     <div class="label">Nome</div>
                     <div class="value">${nomeSafe}</div>
                   </div>
 
-                  <div class="field">
+                  <div class="info-block">
                     <div class="label">E-mail</div>
                     <div class="value">${emailSafe}</div>
                   </div>
 
-                  <div class="field">
-                    <div class="label">WhatsApp</div>
-                    <div class="value">${telefoneSafe}</div>
-                    <a href="${whatsappLink}" class="btn">Chamar Agora</a>
-                  </div>
-
-                  <div class="field">
+                  <div class="info-block" style="border-bottom: none;">
                     <div class="label">Mensagem</div>
                     <div class="message-box">
                       ${mensagemSafe.replace(/\n/g, "<br/>")}
                     </div>
                   </div>
+
+                  <div class="btn-wrap">
+                    <a href="mailto:${emailSafe}" class="btn">Responder Agora</a>
+                  </div>
                 </div>
 
                 <div class="footer">
-                  <p style="font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.3); text-transform: uppercase;">
-                    Enviado via portfólio oficial • <strong>KDuarte</strong>
-                  </p>
+                  © ${new Date().getFullYear()} Real World English - contato@realworldenglish.com.br<br/>
+                  Este é um envio automático. Não responda a este endereço.
                 </div>
               </div>
             </div>
@@ -260,7 +161,7 @@ export async function POST(req: Request) {
     );
 
   } catch (error) {
-    console.error("Erro Final:", error);
+    console.error("ERRO:", error);
     return NextResponse.json(
       { success: false, error: "Erro interno no servidor" },
       { status: 500, headers: corsHeaders() }
