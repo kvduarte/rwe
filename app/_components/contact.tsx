@@ -12,6 +12,7 @@ import {
 declare global {
   interface Window {
     grecaptcha: any;
+    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -59,9 +60,23 @@ export default function Contact() {
     });
   }
 
-  async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
+  function gtag_report_conversion() {
+    console.log("Google Ads: tentando registrar conversão...");
+
+    if (window.gtag) {
+      window.gtag("event", "conversion", {
+        send_to: "AW-18358577900/cbcfCOiYsd8cEOzVhrJE",
+      });
+
+      console.log("Google Ads: conversão enviada!");
+    } else {
+      console.warn(
+        "Google Ads: window.gtag não está carregado."
+      );
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (status === "sending") return;
@@ -88,11 +103,17 @@ export default function Contact() {
 
       const result = await response.json();
 
+      console.log("STATUS DA API:", response.status);
+      console.log("RESULTADO DA API:", result);
+
       if (!response.ok || !result.success) {
         throw new Error(
           result.error || "Erro ao enviar mensagem."
         );
       }
+
+      // Google Ads: registra a conversão somente após o envio bem-sucedido
+      gtag_report_conversion();
 
       setStatus("success");
 
@@ -148,12 +169,7 @@ export default function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      className="bg-black py-24 px-6 border-t border-white/5 relative overflow-hidden"
-    >
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
-
+    <section>
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
@@ -295,7 +311,7 @@ export default function Contact() {
                 >
                   Mensagem
                 </label>
-                
+
                 <textarea
                   id="message"
                   rows={2}
@@ -327,13 +343,16 @@ export default function Contact() {
                 <p className="text-[8px] text-white/20 text-center leading-relaxed uppercase tracking-widest">
                   This site is protected by reCAPTCHA and the Google
                   <br />
+
                   <a
                     href="https://policies.google.com/privacy"
                     className="underline hover:text-white transition-colors"
                   >
                     Privacy Policy
                   </a>
+
                   {" "}and{" "}
+
                   <a
                     href="https://policies.google.com/terms"
                     className="underline hover:text-white transition-colors"
@@ -408,3 +427,4 @@ export default function Contact() {
     </section>
   );
 }
+
