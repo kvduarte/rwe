@@ -170,12 +170,12 @@ export default function Contact() {
 
   return (
     <section>
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-6xl relative z-10 top-15">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           <div className="space-y-12">
             <div>
-              <span className="text-red-600 font-bold tracking-[0.4em] text-[10px] uppercase block mb-4">
+              <span className="text-red-600 font-bold tracking-[0.4em] text-[12px] uppercase block mb-4">
                 Get in Touch
               </span>
 
