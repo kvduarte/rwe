@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isScrolling, setIsScrolling] = useState(false);
 
   const whatsappUrl =
-    "https://wa.me/5519991518640?text=Olá! Gostaria de saber mais sobre os cursos de inglês.";
+    "https://wa.me/5519991518640?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20cursos%20de%20ingl%C3%AAs.";
 
   const navLinks = [
     { name: "Sobre nós", id: "rwe" },
@@ -19,6 +19,17 @@ export default function Navbar() {
     { name: "Experiências", id: "testimonials" },
     { name: "Contato", id: "contact" },
   ];
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,48 +124,48 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "py-3" : "py-6"
+        scrolled ? "py-3 bg-transparent" : "py-6 bg-linear-to-b from-black/80 via-black/40 to-transparent"
       }`}
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <div
-          className={`relative flex items-center justify-between px-8 py-3 rounded-full transition-all duration-500 ${
+          className={`relative flex items-center justify-between px-6 sm:px-8 py-3 rounded-full transition-all duration-500 ${
             scrolled
               ? "bg-black/90 backdrop-blur-xl border border-white/10 shadow-2xl"
               : "bg-transparent"
           }`}
         >
-          {/* LOGO COM BANDEIRA DO REINO UNIDO */}
           <button
             onClick={() => slowScrollTo("showcase")}
-            className="flex items-center gap-4 group cursor-pointer outline-none"
+            className="flex items-center gap-3.5 group cursor-pointer outline-none text-left"
+            aria-label="Ir para o início"
           >
-            <div className="relative w-12 h-8 border border-white/10 overflow-hidden shadow-2xl transform group-hover:scale-110 transition-transform duration-500 shrink-0 rounded-sm">
-              <svg 
-                viewBox="0 0 60 30" 
-                fill="none" 
+            <div className="relative w-11 h-7 sm:w-12 sm:h-8 border border-white/15 overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-500 shrink-0 rounded-sm">
+              <svg
+                viewBox="0 0 60 30"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-full h-full object-cover"
               >
-                <rect width="60" height="30" fill="#012169"/>
-                <path d="M0 0L60 30M60 0L0 30" stroke="#FFF" strokeWidth="6"/>
-                <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" strokeWidth="4"/>
-                <path d="M30 0V30M0 15H60" stroke="#FFF" strokeWidth="10"/>
-                <path d="M30 0V30M0 15H60" stroke="#C8102E" strokeWidth="6"/>
+                <rect width="60" height="30" fill="#012169" />
+                <path d="M0 0L60 30M60 0L0 30" stroke="#FFF" strokeWidth="6" />
+                <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" strokeWidth="4" />
+                <path d="M30 0V30M0 15H60" stroke="#FFF" strokeWidth="10" />
+                <path d="M30 0V30M0 15H60" stroke="#C8102E" strokeWidth="6" />
               </svg>
             </div>
 
-            <div className="flex flex-col text-left">
-              <span className="text-white text-xl font-serif font-bold tracking-tight leading-none">
+            <div className="flex flex-col">
+              <span className="text-white text-lg sm:text-xl font-serif font-bold tracking-tight leading-none">
                 Real World
               </span>
-              <span className="text-red-600 text-[11px] font-black uppercase tracking-[0.6em] leading-none mt-1 pl-1">
+              <span className="text-red-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.5em] leading-none mt-1 pl-0.5">
                 English
               </span>
             </div>
           </button>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-7 xl:gap-9">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
 
@@ -162,7 +173,7 @@ export default function Navbar() {
                 <button
                   key={link.name}
                   onClick={() => slowScrollTo(link.id)}
-                  className={`relative text-[12px] font-bold uppercase tracking-[0.15em] transition-colors group ${
+                  className={`relative text-[12px] font-bold uppercase tracking-[0.15em] transition-colors group cursor-pointer ${
                     isActive
                       ? "text-white"
                       : "text-white/80 hover:text-white"
@@ -188,61 +199,71 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="bg-red-600 text-white hover:bg-white hover:text-black px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-500 shadow-xl inline-block active:scale-95"
             >
-              Matricule-se
+              Falar pelo WhatsApp
             </a>
           </div>
 
           <button
-            className="lg:hidden text-white p-2"
-            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            onClick={() => setIsOpen(true)}
+            aria-label="Abrir menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <Menu size={26} />
           </button>
         </div>
       </div>
 
-      {/* Menu Mobile */}
       <div
-        className={`fixed inset-0 bg-black/95 backdrop-blur-2xl transition-all duration-500 lg:hidden flex flex-col items-center justify-center gap-8 ${
-          isOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible"
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 lg:hidden z-50 ${
+          isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        }`}
+        onClick={() => setIsOpen(false)}
+      />
+
+      <aside
+        className={`fixed top-0 right-0 bottom-0 w-[68%] max-w-85 bg-black/85 backdrop-blur-2xl border-l border-white/10 px-8 py-10 flex flex-col justify-center z-50 transition-transform duration-500 ease-out lg:hidden ${
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <button
-          className="absolute top-8 right-8 text-white hover:text-red-600 transition-colors"
+          className="absolute top-8 right-6 text-white/60 hover:text-white p-2 transition-colors"
           onClick={() => setIsOpen(false)}
+          aria-label="Fechar menu"
         >
-          <X size={32} />
+          <X size={24} />
         </button>
 
-        {navLinks.map((link) => {
-          const isActive = activeSection === link.id;
+        <div className="flex flex-col gap-7 text-left">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
 
-          return (
-            <button
-              key={link.name}
-              onClick={() => slowScrollTo(link.id)}
-              className={`text-3xl font-black uppercase tracking-tight transition-colors ${
-                isActive
-                  ? "text-red-600"
-                  : "text-white hover:text-red-600"
-              }`}
+            return (
+              <button
+                key={link.name}
+                onClick={() => slowScrollTo(link.id)}
+                className={`text-left text-base uppercase tracking-[0.25em] font-normal transition-colors ${
+                  isActive
+                    ? "text-red-500 font-medium"
+                    : "text-white/90 hover:text-white"
+                }`}
+              >
+                {link.name}
+              </button>
+            );
+          })}
+
+          <div className="pt-4 mt-2 border-t border-white/10">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-xs uppercase tracking-[0.2em] font-medium text-red-500 hover:text-red-400 transition-colors"
             >
-              {link.name}
-            </button>
-          );
-        })}
-
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 bg-red-600 text-white px-10 py-4 font-black uppercase tracking-widest rounded-full text-base shadow-2xl hover:scale-105 transition-transform"
-        >
-          Falar no WhatsApp
-        </a>
-      </div>
+              Falar pelo WhatsApp →
+            </a>
+          </div>
+        </div>
+      </aside>
     </nav>
   );
 }

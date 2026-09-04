@@ -22,50 +22,51 @@ const immersionSteps = [
 
 export default function Immersion() {
   return (
-    <section id="immersion" className="bg-black py-24 px-6 overflow-hidden">
+    <section id="immersion" className="bg-black py-16 md:py-24 px-6 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         
-        <div className="flex flex-col md:flex-row gap-16 items-center">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
           
           <div className="w-full md:w-1/2 relative">
-            <div className="relative h-150 w-full overflow-hidden group">
+            <div className="relative h-80 sm:h-105 md:h-150 w-full overflow-hidden group rounded-sm">
               <img 
                 src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=2070" 
-                alt="London Atmosphere" 
+                alt="Big Ben and Westminster Bridge" 
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
               />
-              <div className="absolute bottom-8 left-8 bg-black text-white p-6 backdrop-blur-sm bg-opacity-90">
-                <p className="text-[10px] tracking-[0.3em] uppercase font-bold text-red-600 mb-1">Location</p>
-                <p className="text-sm font-serif italic">Piccadilly Circus, W1</p>
+              <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 bg-black/95 text-white p-4 sm:p-6 backdrop-blur-sm">
+                <p className="text-[10px] tracking-[0.3em] uppercase font-bold text-red-500 mb-1">Location</p>
+                <p className="text-sm font-serif italic text-white">Big Ben, Westminster SW1A</p>
               </div>
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 space-y-12">
+          <div className="w-full md:w-1/2 space-y-8 md:space-y-12">
             <div className="space-y-4">
-              <span className="text-red-600 font-bold tracking-[0.4em] text-[10px] uppercase">
+              <span className="text-red-600 font-bold tracking-[0.4em] text-[10px] uppercase block">
                 Methodology
               </span>
-              <h2 className="text-5xl md:text-6xl font-black text-white leading-none uppercase tracking-tighter">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-none uppercase tracking-tighter">
                 A Imersão <br /> 
                 <span className="text-red-600 italic">Definitiva</span>
               </h2>
-              <p className="text-gray-400 text-lg max-w-md font-light">
+              <p className="text-zinc-300 text-base md:text-lg max-w-md font-light">
                 Esqueça os livros didáticos genéricos. Nossa metodologia é baseada na vivência do mundo real.
               </p>
             </div>
 
-            <div className="space-y-10">
+            <div className="space-y-8 md:space-y-10">
               {immersionSteps.map((step) => (
-                <div key={step.id} className="group flex gap-6 border-b border-white/5 pb-8">
-                  <span className="text-2xl font-serif italic text-red-600/30 group-hover:text-red-600 transition-colors">
+                <div key={step.id} className="group flex gap-5 sm:gap-6 border-b border-zinc-800 pb-6 sm:pb-8">
+                  <span className="text-2xl font-serif italic text-red-500/60 group-hover:text-red-500 transition-colors">
                     {step.id}
                   </span>
-                  <div className="space-y-2">
-                    <h4 className="text-xl font-bold text-white uppercase tracking-tight">
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg sm:text-xl font-bold text-white uppercase tracking-tight">
                       {step.title}
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
+                    </h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed group-hover:text-zinc-200 transition-colors">
                       {step.desc}
                     </p>
                   </div>

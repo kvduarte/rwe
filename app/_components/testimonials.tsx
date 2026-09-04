@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const testimonials = [
@@ -8,7 +8,7 @@ const testimonials = [
     id: 1,
     name: "Amanda Bispo",
     role: "Gerente Nacional de Contas Chaves na empresa Mosaic Brasil",
-    content: "Fiz aulas com o Filipe durante quase 06 anos, ele me preparou para um intercâmbio e durante esses deu um salto no meu inglês para negócios, isso me permitiu atingir novas posições no meu trabalho, trabalhar com equipes e lideranças globais da multinacional que eu atuo hoje. Sou grata ao Filipe, ao seu método de trabalho, ao seu profissionalismo e seu cuidado. Todas as aulas foram personalizadas com muita atenção e pensando sempre nas minhas demandas e desenvolvimento profissional.",
+    content: "Fiz aulas com o Filipe durante quase 06 anos, ele me preparou para um intercâmbio e durante esses anos deu um salto no meu inglês para negócios, isso me permitiu atingir novas posições no meu trabalho, trabalhar com equipes e lideranças globais da multinacional que eu atuo hoje. Sou grata ao Filipe, ao seu método de trabalho, ao seu profissionalismo e seu cuidado. Todas as aulas foram personalizadas com muita atenção e pensando sempre nas minhas demandas e desenvolvimento profissional.",
     image: "/aluna 1.jpeg"
   },
   {
@@ -37,38 +37,14 @@ const testimonials = [
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 } 
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
-
-  const nextTestimonial = useCallback(() => {
+  const nextTestimonial = () => {
     setIndex((prev) => (prev + 1) % testimonials.length);
-  }, []);
+  };
 
   const prevTestimonial = () => {
     setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
-
-  useEffect(() => {
-    if (!isVisible) return;
-    const timer = setInterval(() => {
-      nextTestimonial();
-    }, 20000); 
-    return () => clearInterval(timer);
-  }, [nextTestimonial, index, isVisible]);
 
   useEffect(() => {
     setIsExpanded(false);
@@ -79,65 +55,65 @@ export default function Testimonials() {
 
   return (
     <section 
-      ref={sectionRef} 
       id="testimonials" 
-      className="bg-[#f8f8f8] py-24 px-6 overflow-hidden"
+      className="bg-[#f8f8f8] py-16 md:py-24 px-4 sm:px-6 overflow-hidden"
     >
       <div className="container mx-auto max-w-6xl">
         
-        <div className="mb-16 flex justify-between items-end">
+        <div className="mb-10 md:mb-16 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
           <div>
-            <span className="text-red-600 font-bold tracking-[0.3em] text-xs uppercase block mb-4">
+            <span className="text-red-600 font-bold tracking-[0.2em] sm:tracking-[0.3em] text-xs uppercase block mb-3">
               Alunos que atingiram o topo
             </span>
-            <h2 className="text-5xl md:text-6xl font-black text-[#1a1a1a] uppercase tracking-tighter leading-none">
-              Impacto <br /> <span className="text-black/20 italic">Real</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1a1a1a] uppercase tracking-tighter leading-none">
+              Impacto <br /> <span className="text-black/30 italic">Real</span>
             </h2>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button 
               onClick={prevTestimonial}
-              className="w-12 h-12 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
+              aria-label="Depoimento anterior"
+              className="w-11 h-11 sm:w-12 sm:h-12 border border-black/20 text-[#1a1a1a] flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 rounded-sm"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <button 
               onClick={nextTestimonial}
-              className="w-12 h-12 bg-red-600 text-white flex items-center justify-center hover:bg-black transition-all duration-300 shadow-lg shadow-red-600/20"
+              aria-label="Próximo depoimento"
+              className="w-11 h-11 sm:w-12 sm:h-12 bg-red-600 text-white flex items-center justify-center hover:bg-black transition-all duration-300 shadow-md rounded-sm"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m9 18 6-6-6-6"/></svg>
             </button>
           </div>
         </div>
 
-        <div className="relative min-h-125">
+        <div className="relative min-h-95 sm:min-h-105">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5, ease: "circOut" }}
-              className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-start transition-all duration-500 p-8 md:p-12 relative ${
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start transition-all duration-500 p-6 sm:p-8 md:p-12 relative ${
                 isAmanda 
-                ? 'bg-white border-l-4 border-red-600 shadow-[0_15px_40px_rgba(0,0,0,0.03)]' 
-                : 'bg-white/50 border border-transparent'
+                ? 'bg-white border-l-4 border-red-600 shadow-lg shadow-black/5' 
+                : 'bg-white border border-black/10'
               }`}
             >
-              {/* Coluna da Imagem */}
-              <div className="lg:col-span-4 relative">
-                <div className="aspect-square hover:grayscale-0 transition-all duration-700 relative z-10 overflow-hidden bg-gray-200 border border-black/5">
+              <div className="lg:col-span-4 relative mx-auto lg:mx-0 w-full max-w-70 lg:max-w-none">
+                <div className="aspect-square relative z-10 overflow-hidden bg-zinc-100 border border-black/10 rounded-sm">
                   <img 
                     src={current.image} 
                     alt={current.name} 
+                    loading="lazy"
                     className="w-full h-full object-cover"
                     onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/400?text=Profile"; }}
                   />
                   
-                  {/* Selo de Estrela Minimalista (Apenas para a Amanda) */}
                   {isAmanda && (
-                    <div className="absolute top-3 right-3 z-20 bg-red-600 text-white p-2 rounded-full shadow-md flex items-center justify-center border border-white/10">
+                    <div className="absolute top-3 right-3 z-20 bg-red-600 text-white p-2 rounded-full shadow-md flex items-center justify-center">
                       <svg 
                         width="16" 
                         height="16" 
@@ -153,44 +129,44 @@ export default function Testimonials() {
                     </div>
                   )}
                 </div>
-                <div className={`absolute -bottom-4 -right-4 w-full h-full z-0 transition-all duration-700 ${
+                <div className={`absolute -bottom-3 -right-3 w-full h-full z-0 transition-all duration-700 ${
                   isAmanda 
-                  ? 'border border-red-600/20 opacity-100 translate-x-1 translate-y-1 bg-red-600/2' 
-                  : 'border border-black/5 opacity-50 translate-x-0 translate-y-0'
+                  ? 'border border-red-600/30 bg-red-600/5' 
+                  : 'border border-black/10'
                 }`} />
               </div>
 
-              <div className="lg:col-span-8">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className={`h-px transition-all duration-500 ${isAmanda ? 'w-20 bg-red-600' : 'w-12 bg-black/20'}`} />
+              <div className="lg:col-span-8 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className={`h-px transition-all duration-500 ${isAmanda ? 'w-16 sm:w-20 bg-red-600' : 'w-10 bg-black/30'}`} />
                   {isAmanda && (
-                    <span className="text-red-600 text-[10px] font-black uppercase tracking-widest">
+                    <span className="text-red-600 text-[11px] font-black uppercase tracking-widest">
                       História de Destaque • Case de Sucesso
                     </span>
                   )}
                 </div>
 
-                <div className="relative mb-10">
+                <div className="relative">
                   <blockquote 
-                    className={`text-xl md:text-2xl leading-relaxed italic transition-all duration-500 ${
-                      !isExpanded ? 'line-clamp-5' : ''
-                    } ${isAmanda ? 'text-2xl md:text-3xl font-bold text-[#1a1a1a]' : 'font-medium text-black/70'}`}
+                    className={`text-lg sm:text-xl md:text-2xl leading-relaxed italic transition-all duration-500 text-zinc-800 ${
+                      !isExpanded ? 'line-clamp-4 sm:line-clamp-5' : ''
+                    }`}
                   >
                     "{current.content}"
                   </blockquote>
                   
                   <button 
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="mt-4 text-red-600 text-xs font-black uppercase tracking-widest hover:text-black transition-colors flex items-center gap-2"
+                    className="mt-4 text-red-600 text-xs font-black uppercase tracking-widest hover:text-black transition-colors flex items-center gap-2 cursor-pointer focus:outline-none"
                   >
                     {isExpanded ? "[ Ler menos ]" : "[ Ler depoimento completo ]"}
                   </button>
                 </div>
 
-                <div>
-                  <h4 className="text-2xl font-black uppercase tracking-tight text-[#1a1a1a]">
+                <div className="pt-2">
+                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#1a1a1a]">
                     {current.name}
-                  </h4>
+                  </h3>
                   <p className="text-red-600 text-xs font-bold uppercase tracking-widest mt-1">
                     {current.role}
                   </p>
@@ -200,13 +176,14 @@ export default function Testimonials() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-20 flex gap-2">
+        <div className="mt-12 sm:mt-16 flex justify-center sm:justify-start gap-2">
           {testimonials.map((_, i) => (
             <button 
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-2 transition-all duration-500 rounded-full ${
-                index === i ? 'w-12 bg-red-600' : 'w-4 bg-black/10 hover:bg-black/20'
+              aria-label={`Ir para depoimento ${i + 1}`}
+              className={`h-2.5 transition-all duration-300 rounded-full cursor-pointer ${
+                index === i ? 'w-10 sm:w-12 bg-red-600' : 'w-3.5 bg-black/20 hover:bg-black/40'
               }`}
             />
           ))}

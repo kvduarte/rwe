@@ -31,15 +31,15 @@ const courses = [
 
 export default function CourseLevels() {
   return (
-    <section id="courses" className="bg-[#f8f8f8] py-20 px-6 text-[#1a1a1a]">
-      <div className="container mx-auto max-w-350">
+    <section id="courses" className="bg-[#f8f8f8] py-12 md:py-20 px-4 sm:px-6 text-[#1a1a1a]">
+      <div className="container mx-auto max-w-7xl">
         
-        <div className="mb-16">
-          <span className="text-red-600 font-bold tracking-[0.3em] text-xs uppercase block mb-4">
+        <div className="mb-10 md:mb-16">
+          <span className="text-red-600 font-bold tracking-[0.2em] sm:tracking-[0.3em] text-xs uppercase block mb-3">
             Nossa Jornada
           </span>
-          <h2 className="text-5xl md:text-6xl font-black text-[#1a1a1a] uppercase tracking-tighter leading-none">
-            Níveis de <br /> <span className="text-black/20 italic">Excelência</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1a1a1a] uppercase tracking-tighter leading-none">
+            Níveis de <br /> <span className="text-black/30 italic">Excelência</span>
           </h2>
         </div>
 
@@ -47,41 +47,38 @@ export default function CourseLevels() {
           {courses.map((course, index) => (
             <div 
               key={index} 
-              className="group relative bg-white border border-black/5 p-8 hover:shadow-2xl hover:shadow-red-600/10 transition-all duration-500 flex flex-col"
+              className="group relative bg-white border border-black/10 p-6 sm:p-8 hover:shadow-2xl hover:shadow-red-600/10 transition-all duration-300 flex flex-col justify-between"
             >
-              {/* Número de fundo */}
-              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">
-                <span className="text-6xl font-black text-black">{index + 1}</span>
+              <div>
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-25 transition-opacity select-none">
+                  <span className="text-5xl sm:text-6xl font-black text-black">{index + 1}</span>
+                </div>
+
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="bg-red-600 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 text-white">
+                    {course.tag}
+                  </span>
+                  <span className="text-zinc-600 text-[11px] font-bold uppercase tracking-widest">
+                    {course.level}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-4 uppercase tracking-tight leading-tight">
+                  {course.title}
+                </h3>
+
+                <p className="text-zinc-700 text-sm sm:text-base leading-relaxed mb-6">
+                  {course.description}
+                </p>
               </div>
 
-              {/* Tags */}
-              <div className="flex items-center gap-3 mb-6">
-                <span className="bg-red-600 text-[10px] font-bold uppercase tracking-widest px-2 py-1 text-white">
-                  {course.tag}
-                </span>
-                <span className="text-black/40 text-[10px] font-bold uppercase tracking-widest">
-                  {course.level}
-                </span>
-              </div>
-
-              {/* Título */}
-              <h3 className="text-3xl font-bold text-[#1a1a1a] mb-6 uppercase tracking-tight leading-[0.9]">
-                {course.title}
-              </h3>
-
-              {/* Descrição - Removi o mb-8 para o texto ficar mais próximo da linha */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                {course.description}
-              </p>
-
-              {/* Linha decorativa - Agora ela segue o fluxo do texto sem pular pro final */}
-              <div className="w-full pt-4 border-t border-black/5 group-hover:border-red-600/30 transition-colors" />
+              <div className="w-full pt-4 border-t border-black/10 group-hover:border-red-600/40 transition-colors" />
             </div>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-black/30 text-sm uppercase tracking-widest">
+        <div className="mt-12 md:mt-16 text-center">
+          <p className="text-zinc-500 text-xs sm:text-sm font-medium uppercase tracking-widest">
             Todos os cursos incluem suporte individual
           </p>
         </div>

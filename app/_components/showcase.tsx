@@ -35,6 +35,15 @@ const touristSpots = [
   },
 ];
 
+const keywords = [
+  "Do Zero ao Avançado",
+  "Inglês Corporativo",
+  "Aulas Online",
+  "Suporte ao Aluno",
+  "Horários Flexíveis",
+  "Conversação Prática",
+];
+
 export default function Showcase() {
   const [activeImage, setActiveImage] = useState(0);
 
@@ -110,37 +119,37 @@ export default function Showcase() {
         </div>
       ))}
 
-      <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/40 to-transparent z-10" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/95 via-black/60 to-transparent z-10" />
 
       <div className="relative z-20 container mx-auto px-6 md:px-16 lg:px-24">
-        <div className="space-y-8 max-w-3xl text-left">
+        <div className="space-y-6 max-w-3xl text-left">
+          {/* Badge de Autoridade com Localização Dinâmica */}
           <div className="flex items-center gap-4 border-l-4 border-red-600 pl-6 py-1">
             <span className="text-white text-xs tracking-[0.2em] uppercase font-bold drop-shadow-md">
-              Metodologia 100% para comunicação •{" "}
-              {touristSpots[activeImage].location}
+              15 anos de experiência • +8.000 horas de aula • {touristSpots[activeImage].location}
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter drop-shadow-2xl">
+          <h1 className="text-5xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter drop-shadow-2xl">
             Real World <br />
             <span className="text-red-600">English</span>
           </h1>
 
-          <p className="text-white text-lg md:text-xl max-w-md leading-relaxed font-medium drop-shadow-md">
-            Não aprenda apenas gramática. Viva o idioma. A{" "}
-            <span className="text-white font-black underline decoration-red-600 underline-offset-4">
-              RWE
-            </span>{" "}
-            conecta você diretamente com o mundo.
-          </p>
+          <div className="space-y-3 max-w-xl">
+            <p className="text-white text-base md:text-lg leading-relaxed font-medium drop-shadow-md">
+              Inglês para adultos que querem desenvolver domínio prático do idioma com método, consistência e aplicação real.
+            </p>
+            <p className="text-white/80 text-xs md:text-sm leading-relaxed border-l border-white/20 pl-4 py-0.5">
+              Do inglês geral, do zero ao avançado, à preparação para situações profissionais, reuniões e comunicação no mercado de trabalho.
+            </p>
+          </div>
 
-          <div className="flex flex-wrap gap-5 pt-4">
+          <div className="flex flex-wrap gap-5 pt-2">
             <button
               onClick={() => slowScrollTo("courses")}
               className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 font-bold uppercase tracking-widest transition-all duration-500 flex items-center group text-sm shadow-xl"
             >
               Ver Cursos
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -163,6 +172,19 @@ export default function Showcase() {
             >
               Como Funciona
             </button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-4 border-t border-white/10 max-w-2xl">
+            {keywords.map((word, idx) => (
+              <React.Fragment key={idx}>
+                <span className="text-white/80 text-xs md:text-sm font-semibold tracking-wider uppercase drop-shadow-sm">
+                  {word}
+                </span>
+                {idx < keywords.length - 1 && (
+                  <span className="text-red-600 font-bold text-xs">•</span>
+                )}
+              </React.Fragment>
+            ))}
           </div>
         </div>
       </div>
