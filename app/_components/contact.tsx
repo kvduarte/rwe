@@ -169,7 +169,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 px-8 sm:px-10 lg:px-12 overflow-hidden">
+    <section id="contact" className="bg-black text-white py-16 md:py-24 px-8 sm:px-10 lg:px-12 overflow-hidden">
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 

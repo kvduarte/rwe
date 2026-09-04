@@ -8,7 +8,7 @@ const testimonials = [
     id: 1,
     name: "Amanda Bispo",
     role: "Gerente Nacional de Contas Chaves na empresa Mosaic Brasil",
-    content: "Fiz aulas com o Filipe durante quase 06 anos, ele me preparou para um intercâmbio e durante esses anos deu um salto no meu inglês para negócios, isso me permitiu atingir novas posições no meu trabalho, trabalhar com equipes e lideranças globais da multinacional que eu atuo hoje. Sou grata ao Filipe, ao seu método de trabalho, ao seu profissionalismo e seu cuidado. Todas as aulas foram personalizadas com muita atenção e pensando sempre nas minhas demandas e desenvolvimento profissional.",
+    content: "Fiz aulas com o Filipe durante quase 06 anos, ele me preparou para um intercâmbio e durante esses anos meu inglês para negócios melhou muito, isso me permitiu atingir novas posições no meu trabalho, trabalhar com equipes e lideranças globais da multinacional que eu atuo hoje. Sou grata ao Filipe, ao seu método de trabalho, ao seu profissionalismo e seu cuidado. Todas as aulas foram personalizadas com muita atenção e pensando sempre nas minhas demandas e desenvolvimento profissional.",
     image: "/aluna 1.jpeg"
   },
   {

@@ -98,7 +98,7 @@ export default function Showcase() {
   return (
     <section
       id="showcase"
-      className="relative min-h-[100dvh] w-full flex items-center justify-start overflow-hidden bg-neutral-900 pt-28 pb-16 sm:pt-36 sm:pb-20 md:py-0"
+      className="relative min-h-dvhw-full flex items-center justify-start overflow-hidden bg-neutral-900 pt-28 pb-16 sm:pt-36 sm:pb-20 md:py-0"
     >
       {touristSpots.map((spot, index) => (
         <div
@@ -119,13 +119,10 @@ export default function Showcase() {
         </div>
       ))}
 
-      {/* Overlay escuro reforçado no lado esquerdo */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 lg:via-black/60 to-transparent z-10" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/95 via-black/80 lg:via-black/60 to-transparent z-10" />
 
-      {/* Container com padding top para empurrar o conteúdo para baixo da navbar */}
       <div className="relative z-20 container mx-auto px-6 sm:px-12 md:px-16 lg:px-24">
         <div className="space-y-5 sm:space-y-6 max-w-3xl text-left">
-          {/* Badge de Autoridade com espaço extra do topo */}
           <div className="flex items-center gap-4 border-l-4 border-red-600 pl-3 sm:pl-6 py-1">
             <span className="text-white text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.2em] uppercase font-bold drop-shadow-md leading-relaxed">
               15 anos de experiência • +8.000 horas de aula • {touristSpots[activeImage].location}
@@ -191,7 +188,6 @@ export default function Showcase() {
         </div>
       </div>
 
-      {/* Indicadores do carrossel */}
       <div className="absolute bottom-4 sm:bottom-12 left-6 sm:left-12 md:left-16 lg:left-24 z-30 flex gap-2.5">
         {touristSpots.map((_, i) => (
           <div
