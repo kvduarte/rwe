@@ -98,7 +98,7 @@ export default function Showcase() {
   return (
     <section
       id="showcase"
-      className="relative h-screen min-h-175 w-full flex items-center justify-start overflow-hidden bg-neutral-900"
+      className="relative min-h-[100dvh] w-full flex items-center justify-start overflow-hidden bg-neutral-900 pt-28 pb-16 sm:pt-36 sm:pb-20 md:py-0"
     >
       {touristSpots.map((spot, index) => (
         <div
@@ -119,35 +119,37 @@ export default function Showcase() {
         </div>
       ))}
 
-      <div className="absolute inset-0 bg-linear-to-r from-black/95 via-black/60 to-transparent z-10" />
+      {/* Overlay escuro reforçado no lado esquerdo */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 lg:via-black/60 to-transparent z-10" />
 
-      <div className="relative z-20 container mx-auto px-6 md:px-16 lg:px-24">
-        <div className="space-y-6 max-w-3xl text-left">
-          {/* Badge de Autoridade com Localização Dinâmica */}
-          <div className="flex items-center gap-4 border-l-4 border-red-600 pl-6 py-1">
-            <span className="text-white text-xs tracking-[0.2em] uppercase font-bold drop-shadow-md">
+      {/* Container com padding top para empurrar o conteúdo para baixo da navbar */}
+      <div className="relative z-20 container mx-auto px-6 sm:px-12 md:px-16 lg:px-24">
+        <div className="space-y-5 sm:space-y-6 max-w-3xl text-left">
+          {/* Badge de Autoridade com espaço extra do topo */}
+          <div className="flex items-center gap-4 border-l-4 border-red-600 pl-3 sm:pl-6 py-1">
+            <span className="text-white text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.2em] uppercase font-bold drop-shadow-md leading-relaxed">
               15 anos de experiência • +8.000 horas de aula • {touristSpots[activeImage].location}
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter drop-shadow-2xl">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter drop-shadow-2xl">
             Real World <br />
             <span className="text-red-600">English</span>
           </h1>
 
           <div className="space-y-3 max-w-xl">
-            <p className="text-white text-base md:text-lg leading-relaxed font-medium drop-shadow-md">
+            <p className="text-white text-sm sm:text-base md:text-lg leading-relaxed font-medium drop-shadow-md">
               Inglês para adultos que querem desenvolver domínio prático do idioma com método, consistência e aplicação real.
             </p>
-            <p className="text-white/80 text-xs md:text-sm leading-relaxed border-l border-white/20 pl-4 py-0.5">
+            <p className="text-white/90 text-xs sm:text-sm leading-relaxed border-l border-white/30 pl-4 py-0.5">
               Do inglês geral, do zero ao avançado, à preparação para situações profissionais, reuniões e comunicação no mercado de trabalho.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-5 pt-2">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3.5 sm:gap-5 pt-2">
             <button
               onClick={() => slowScrollTo("courses")}
-              className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 font-bold uppercase tracking-widest transition-all duration-500 flex items-center group text-sm shadow-xl"
+              className="bg-red-600 hover:bg-red-700 text-white px-8 sm:px-10 py-3.5 sm:py-4 font-bold uppercase tracking-widest transition-all duration-500 flex items-center justify-center group text-xs sm:text-sm shadow-xl rounded-sm"
             >
               Ver Cursos
               <svg
@@ -168,16 +170,16 @@ export default function Showcase() {
 
             <button
               onClick={() => slowScrollTo("immersion")}
-              className="bg-black/20 backdrop-blur-md border-2 border-white/50 hover:border-white text-white px-10 py-4 font-bold uppercase tracking-widest transition-all duration-500 text-sm"
+              className="bg-black/40 backdrop-blur-md border border-white/60 hover:border-white text-white px-8 sm:px-10 py-3.5 sm:py-4 font-bold uppercase tracking-widest transition-all duration-500 text-xs sm:text-sm text-center rounded-sm"
             >
               Como Funciona
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-4 border-t border-white/10 max-w-2xl">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 pt-3 border-t border-white/15 max-w-2xl">
             {keywords.map((word, idx) => (
               <React.Fragment key={idx}>
-                <span className="text-white/80 text-xs md:text-sm font-semibold tracking-wider uppercase drop-shadow-sm">
+                <span className="text-white/90 text-[10px] sm:text-xs md:text-sm font-semibold tracking-wider uppercase drop-shadow-sm">
                   {word}
                 </span>
                 {idx < keywords.length - 1 && (
@@ -189,12 +191,13 @@ export default function Showcase() {
         </div>
       </div>
 
-      <div className="absolute bottom-12 left-6 md:left-16 lg:left-24 z-30 flex gap-3">
+      {/* Indicadores do carrossel */}
+      <div className="absolute bottom-4 sm:bottom-12 left-6 sm:left-12 md:left-16 lg:left-24 z-30 flex gap-2.5">
         {touristSpots.map((_, i) => (
           <div
             key={i}
             className={`h-1.5 transition-all duration-1000 rounded-full ${
-              i === activeImage ? "w-16 bg-red-600" : "w-4 bg-white/40"
+              i === activeImage ? "w-10 sm:w-16 bg-red-600" : "w-2.5 sm:w-4 bg-white/40"
             }`}
           />
         ))}
