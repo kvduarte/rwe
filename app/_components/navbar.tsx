@@ -127,9 +127,9 @@ export default function Navbar() {
         scrolled ? "py-3 bg-transparent" : "py-6 bg-linear-to-b from-black/80 via-black/40 to-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 md:px-8">
+      <div className="container mx-auto px-2 sm:px-6 md:px-8">
         <div
-          className={`relative flex items-center justify-between px-6 sm:px-8 py-3 rounded-full transition-all duration-500 ${
+          className={`relative flex items-center justify-between px-3 sm:px-8 py-3 rounded-full transition-all duration-500 ${
             scrolled
               ? "bg-black/90 backdrop-blur-xl border border-white/10 shadow-2xl"
               : "bg-transparent"
@@ -137,10 +137,10 @@ export default function Navbar() {
         >
           <button
             onClick={() => slowScrollTo("showcase")}
-            className="flex items-center gap-3.5 group cursor-pointer outline-none text-left"
+            className="flex items-center gap-2 sm:gap-3.5 group cursor-pointer outline-none text-left shrink-0"
             aria-label="Ir para o início"
           >
-            <div className="relative w-11 h-7 sm:w-12 sm:h-8 border border-white/15 overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-500 shrink-0 rounded-sm">
+            <div className="relative w-8 h-5 sm:w-12 sm:h-8 border border-white/15 overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-500 shrink-0 rounded-sm">
               <svg
                 viewBox="0 0 60 30"
                 fill="none"
@@ -156,10 +156,10 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col">
-              <span className="text-white text-lg sm:text-xl font-serif font-bold tracking-tight leading-none">
+              <span className="text-white text-xs sm:text-xl font-serif font-bold tracking-tight leading-none">
                 Real World
               </span>
-              <span className="text-red-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.5em] leading-none mt-1 pl-0.5">
+              <span className="text-red-600 text-[7px] sm:text-[11px] font-black uppercase tracking-[0.25em] sm:tracking-[0.5em] leading-none mt-0.5 sm:mt-1 pl-0.5">
                 English
               </span>
             </div>
@@ -192,24 +192,24 @@ export default function Navbar() {
             })}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-red-600 text-white hover:bg-white hover:text-black px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-500 shadow-xl inline-block active:scale-95"
+              className="bg-red-600 text-white hover:bg-white hover:text-black px-2.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-[8px] sm:text-[11px] font-black uppercase tracking-wider sm:tracking-widest transition-all duration-500 shadow-xl inline-block active:scale-95 whitespace-nowrap"
             >
               Falar pelo WhatsApp
             </a>
-          </div>
 
-          <button
-            className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-            onClick={() => setIsOpen(true)}
-            aria-label="Abrir menu"
-          >
-            <Menu size={26} />
-          </button>
+            <button
+              className="lg:hidden text-white p-1 sm:p-2 rounded-lg hover:bg-white/10 transition-colors"
+              onClick={() => setIsOpen(true)}
+              aria-label="Abrir menu"
+            >
+              <Menu size={20} className="sm:w-6 sm:h-6" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -251,17 +251,6 @@ export default function Navbar() {
               </button>
             );
           })}
-
-          <div className="pt-4 mt-2 border-t border-white/10">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-xs uppercase tracking-[0.2em] font-medium text-red-500 hover:text-red-400 transition-colors"
-            >
-              Falar pelo WhatsApp →
-            </a>
-          </div>
         </div>
       </aside>
     </nav>
