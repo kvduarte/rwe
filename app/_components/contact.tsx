@@ -112,7 +112,6 @@ export default function Contact() {
         );
       }
 
-      // Google Ads: registra a conversão somente após o envio bem-sucedido
       gtag_report_conversion();
 
       setStatus("success");
@@ -173,7 +172,6 @@ export default function Contact() {
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-          {/* Coluna da Esquerda (Mantida à esquerda com recuo seguro) */}
           <div className="space-y-8 sm:space-y-12 text-left pl-2 sm:pl-0">
             <div>
               <span className="text-red-600 font-bold tracking-[0.3em] sm:tracking-[0.4em] text-xs uppercase block mb-4">
@@ -188,7 +186,7 @@ export default function Contact() {
               </h2>
 
               <p className="text-gray-300 max-w-md leading-relaxed text-base sm:text-lg font-light">
-                Dúvidas sobre o método Mastery ou deseja um plano personalizado?
+                Dúvidas sobre o método ou deseja um plano personalizado?
               </p>
             </div>
 
@@ -235,7 +233,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Card do Formulário */}
           <div className="bg-[#0A0A0A] p-6 sm:p-10 lg:p-14 relative border border-white/15 shadow-2xl backdrop-blur-sm rounded-sm">
 
             <div className="absolute top-0 right-0 w-10 sm:w-12 h-10 sm:h-12 border-t-2 border-r-2 border-red-600" />
@@ -381,7 +378,6 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Rodapé */}
         <div className="mt-20 sm:mt-32 pt-10 sm:pt-12 border-t border-white/10 relative">
 
           <button
