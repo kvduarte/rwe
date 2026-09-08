@@ -25,7 +25,7 @@ const courses = [
     level: "Corporate",
     tag: "B2 - C2",
     title: "Business English",
-    description: "Aprenda desde passar em uma entrevista de emprego até viver o dia a dia da vida corporativa (reuniões, apresentações de projetos e viagens a negócios)."
+    description: "Simulações de entrevistas executivas, liderança de reuniões, apresentações de projetos e negociações no ambiente corporativo internacional."
   }
 ];
 

@@ -21,7 +21,7 @@ export default function AboutUs() {
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-red-600 p-8 hidden md:block">
-              <p className="text-2xl font-black italic tracking-tighter text-white">EST. 2026</p>
+              <p className="text-2xl font-black italic tracking-tighter text-white">15 YEARS OF EXCELLENCE</p>
             </div>
           </div>
 

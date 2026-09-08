@@ -11,7 +11,7 @@ const immersionSteps = [
   {
     id: "02",
     title: "Cultural Deep Dive",
-    desc: "Inglês não é só a fala mas também particularidades do idioma em diferentes contextos e culturas."
+    desc: "Inglês não é só a fala, mas também particularidades do idioma em diferentes contextos e culturas."
   },
   {
     id: "03",
@@ -66,7 +66,7 @@ export default function Immersion() {
                     <h3 className="text-lg sm:text-xl font-bold text-white uppercase tracking-tight">
                       {step.title}
                     </h3>
-                    <p className="text-zinc-400 text-sm leading-relaxed group-hover:text-zinc-200 transition-colors">
+                    <p className="text-zinc-300 text-sm leading-relaxed group-hover:text-zinc-200 transition-colors">
                       {step.desc}
                     </p>
                   </div>
