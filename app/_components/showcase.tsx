@@ -125,7 +125,7 @@ export default function Showcase() {
         <div className="space-y-6 max-w-3xl text-left">
           <div className="flex items-center gap-4 border-l-4 border-red-600 pl-4 sm:pl-6 py-1">
             <span className="text-white text-[11px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-bold drop-shadow-md leading-relaxed">
-              15 anos de experiência • +8.000 horas de aula
+              15 anos de experiência • +8.000 horas de estudo do idioma
             </span>
           </div>
 
@@ -136,10 +136,10 @@ export default function Showcase() {
 
           <div className="space-y-3 max-w-xl">
             <p className="text-white text-sm sm:text-base md:text-lg leading-relaxed font-medium drop-shadow-md">
-              Inglês para adultos que querem desenvolver domínio prático do idioma com método, consistência e aplicação real.
+              Inglês para adoslecentes e adultos que querem desenvolver domínio prático do idioma com método, consistência e aplicação real.
             </p>
             <p className="text-white/90 text-xs sm:text-sm leading-relaxed border-l border-white/30 pl-4 py-0.5">
-              Do inglês geral, do zero ao avançado, à preparação para situações profissionais, reuniões e comunicação no mercado de trabalho.
+              Do inglês geral, do zero ao avançado, à preparação para situações profissionais e pessoais, reuniões e comunicação no mercado de trabalho.
             </p>
           </div>
 
